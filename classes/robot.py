@@ -13,7 +13,6 @@ class Robot:
         "positive_only": "Coordinates should be positive integer only",
         "range": f"Coordinates should only be between {MIN_X} and {MAX_X}"
     }
-
     speed = 1   # We can make this robot faster in the future
     COMPASS = {
         "NORTH": [0, speed],
@@ -52,10 +51,7 @@ class Robot:
         except ValueError:
             print(self.ERROR_MESSAGES['place'])
             return None
-        if next_x < 0:
-            print(self.ERROR_MESSAGES['positive_only'])
-            return None
-        if next_y < 0:
+        if any([next_x < 0, next_y < 0]):
             print(self.ERROR_MESSAGES['positive_only'])
             return None
         if any([
