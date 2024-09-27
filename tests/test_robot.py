@@ -27,7 +27,7 @@ def test_rotate_left_360():
     assert robot.facing == "SOUTH"
 
 
-def test_will_not_fall_x():
+def test_will_not_fall_min_x():
     """Robot is facing west and will move 3 times"""
     robot = Robot()
     robot.place(1, 0, "WEST")
@@ -37,7 +37,16 @@ def test_will_not_fall_x():
     assert robot.curr_x == 0
 
 
-def test_will_not_fall_y():
+def test_will_not_fall_max_x():
+    robot = Robot()
+    robot.place(Robot.MAX_X, 0, "EAST")
+    robot.move()
+    robot.move()
+    robot.move()
+    assert robot.curr_x == Robot.MAX_X
+
+
+def test_will_not_fall_min_y():
     """Robot is facing south and will move 3 times"""
     robot = Robot()
     robot.place(1, 0, "SOUTH")
@@ -45,6 +54,15 @@ def test_will_not_fall_y():
     robot.move()
     robot.move()
     assert robot.curr_y == 0
+
+
+def test_will_not_fall_max_y():
+    robot = Robot()
+    robot.place(0, Robot.MAX_Y, "NORTH")
+    robot.move()
+    robot.move()
+    robot.move()
+    assert robot.curr_y == Robot.MAX_Y
 
 
 def test_robot_ignores_falling_commands_only():
@@ -59,6 +77,9 @@ def test_robot_ignores_falling_commands_only():
     robot.rotate("RIGHT")
     robot.rotate("RIGHT")
     assert robot.facing == "NORTH"
+    robot.move()
+    robot.move()
+    robot.move()
     robot.move()
     robot.move()
     robot.move()

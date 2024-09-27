@@ -1,10 +1,17 @@
 
 class Robot:
+    # The application is a simulation of a toy robot moving on
+    # a square table top, of dimensions 5 units x 5 units.
+    MIN_X = 0
+    MIN_Y = 0
+    MAX_X = 4
+    MAX_Y = 4
     COMMANDS = ["PLACE", "MOVE", "RIGHT", "LEFT", "REPORT", "EXIT"]
     ERROR_MESSAGES = {
         "invalid": "Invalid command.",
         "place": "Usage: PLACE x,y,direction",
         "positive_only": "Coordinates should be positive integer only",
+        "range": f"Coordinates should only be between {MIN_X} and {MAX_X}"
     }
 
     speed = 1   # We can make this robot faster in the future
@@ -14,7 +21,7 @@ class Robot:
         "SOUTH": [0, -speed],
         "WEST": [-speed, 0]
     }
-    is_active = False
+    is_active = False   # Terminates the loop
     facing = None
     curr_x = 0
     curr_y = 0
@@ -25,9 +32,17 @@ class Robot:
 
     def __str__(self):
         # returns human readable version of the object
-        if self.facing:
+        if self.is_on_the_table:
             return f"{self.curr_x},{self.curr_y},{self.facing}"
         return ""
+
+    @property
+    def is_on_the_table(self):
+        """Flag that tells us the robot is on the table"""
+        # This just checks that facing is set.
+        # Currently it will only be set by using of the place function.
+        # All commands until then gives a return value of None
+        return bool(self.facing)
 
     def place(self, x, y, f):
         """Function that sets the location and direction of the robot"""
@@ -43,6 +58,12 @@ class Robot:
         if next_y < 0:
             print(self.ERROR_MESSAGES['positive_only'])
             return None
+        if any([
+            next_x not in range(self.MIN_X, self.MAX_X + 1),
+            next_y not in range(self.MIN_Y, self.MAX_Y + 1),
+        ]):
+            print(self.ERROR_MESSAGES['range'])
+            return None
         if f not in self.COMPASS.keys():
             print(self.ERROR_MESSAGES['place'])
             return None
@@ -53,13 +74,18 @@ class Robot:
     def move(self):
         """Function that moves the robot"""
         # check if facing is set, if not return
-        if not self.facing:
+        if not self.is_on_the_table:
             return None
         move_x, move_y = self.COMPASS[self.facing]
         next_x = sum([self.curr_x, move_x])
         next_y = sum([self.curr_y, move_y])
         # Check if the robot will fall
-        will_fall = any([next_x == -1, next_y == -1])
+        will_fall = any([
+            next_x < self.MIN_X,
+            next_y < self.MIN_Y,
+            next_x > self.MAX_X,
+            next_y > self.MAX_X
+        ])
         if will_fall:
             return None
         # it did not fall then set current coordinates
@@ -73,7 +99,7 @@ class Robot:
         # python versions (e.g. 2.7) but will work in newer versions
         # of Python.
         # compass_keys = list(self.COMPASS.keys())
-        if self.facing:
+        if self.is_on_the_table:
             compass_keys = ["NORTH", "EAST", "SOUTH", "WEST"]
             curr_facing_idx = compass_keys.index(self.facing)
             if direction == "RIGHT":

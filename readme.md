@@ -25,7 +25,7 @@ Once you are all setup run the following command.
 docker-compose up --build
 ```
 
-User docker exec command to run the script. Run the following command to get your app's container ID.
+Use docker exec command to run the script. Run the following command to get your app's container ID.
 
 ```bash
 docker ps
@@ -62,3 +62,34 @@ https://flake8.pycqa.org/en/latest/#
 ```bash
 flake8
 ```
+
+Example Input and Output:
+-------------------------
+
+```
+PLACE 0,0,NORTH
+MOVE
+REPORT
+Output: 0,1,NORTH
+```
+
+
+```
+PLACE 0,0,NORTH
+LEFT
+REPORT
+Output: 0,0,WEST
+```
+
+
+```
+PLACE 1,2,EAST
+MOVE
+MOVE
+LEFT
+MOVE
+REPORT
+Output: 3,3,NORTH
+```
+
+Added EXIT command to terminate the script.
