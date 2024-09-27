@@ -1,5 +1,40 @@
+Installation
+------------
+Script was created using Python 3.9.6
 
+#### Using Virtualenv
+If you want to run this simple script in its own virtual environment follow the following step.
 
+```bash
+pip3 install -r requirements.txt
+```
+
+Install Flake8 (optional)
+```bash
+python -m pip install flake8
+```
+
+#### Using Docker
+Ensure you have Docker installed in your machine.
+
+[Get Started with Docker](https://www.docker.com/get-started/)
+
+Once you are all setup run the following command.
+
+```bash
+docker-compose up --build
+```
+
+User docker exec command to run the script. Run the following command to get your app's container ID.
+
+```bash
+docker ps
+```
+
+Then run a shell in your container by doing:
+```bash
+docker exec -it your_container_id /bin/bash
+```
 
 Run the script
 --------------
