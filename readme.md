@@ -10,7 +10,7 @@ Ensure you have Docker installed in your machine.
 Once you are all setup run the following command.
 
 ```bash
-docker-compose up --build
+docker-compose up --build --detach
 ```
 
 Use docker exec command to run the script. Run the following command to get your app's container ID.
