@@ -153,6 +153,6 @@ class Robot:
 
     def report(self):
         """Report the robot's current coordinates and direction"""
-        if not self.facing:
+        if not self.is_on_the_table:
             return None
         print(self.__str__())
