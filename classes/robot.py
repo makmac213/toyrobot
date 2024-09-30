@@ -80,7 +80,7 @@ class Robot:
             next_x < self.MIN_X,
             next_y < self.MIN_Y,
             next_x > self.MAX_X,
-            next_y > self.MAX_X
+            next_y > self.MAX_Y
         ])
         if will_fall:
             return None
