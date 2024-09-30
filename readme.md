@@ -27,6 +27,8 @@ docker exec -it your_container_id /bin/bash
 Run the script
 --------------
 
+> Commands are case-sensitive, use uppercase letters only.
+
 ```bash
 python3 main.py
 ```
