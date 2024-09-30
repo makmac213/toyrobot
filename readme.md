@@ -2,18 +2,6 @@ Installation
 ------------
 Script was created using Python 3.9.6
 
-#### Using Virtualenv
-If you want to run this simple script in its own virtual environment follow the following step.
-
-```bash
-pip3 install -r requirements.txt
-```
-
-Install Flake8 (optional)
-```bash
-python -m pip install flake8
-```
-
 #### Using Docker
 Ensure you have Docker installed in your machine.
 
@@ -50,6 +38,15 @@ Run tests
 ```bash
 python3 -m pytest
 ```
+
+#### About the tests
+
+1. test_default_outputs.py
+    * Contains tests given in the document.
+2. test_commands.py
+    * Test as though user is giving commands in the console.
+3. test_robot.py
+    * Tests for the robots movement and constraints.
 
 
 Run Flake8 (optional)

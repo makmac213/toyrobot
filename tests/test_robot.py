@@ -50,18 +50,16 @@ def test_will_not_fall_min_y():
     """Robot is facing south and will move 3 times"""
     robot = Robot()
     robot.place(1, 0, "SOUTH")
-    robot.move()
-    robot.move()
-    robot.move()
+    for ctr in range(0, 10):
+        robot.move()
     assert robot.curr_y == 0
 
 
 def test_will_not_fall_max_y():
     robot = Robot()
     robot.place(0, Robot.MAX_Y, "NORTH")
-    robot.move()
-    robot.move()
-    robot.move()
+    for ctr in range(0, 10):
+        robot.move()
     assert robot.curr_y == Robot.MAX_Y
 
 
@@ -77,11 +75,6 @@ def test_robot_ignores_falling_commands_only():
     robot.rotate("RIGHT")
     robot.rotate("RIGHT")
     assert robot.facing == "NORTH"
-    robot.move()
-    robot.move()
-    robot.move()
-    robot.move()
-    robot.move()
-    robot.move()
-    robot.move()
+    for ctr in range(0, 10):
+        robot.move()
     assert robot.curr_y == 4
